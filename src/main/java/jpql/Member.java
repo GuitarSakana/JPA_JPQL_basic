@@ -1,8 +1,6 @@
 package jpql;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Member {
@@ -10,6 +8,10 @@ public class Member {
     private Long id;
     private String username;
     private int age;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     public Long getId() {
         return id;
