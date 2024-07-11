@@ -12,9 +12,14 @@ public class JpaMain {
         tx.begin();
 
         try {
+                Team team = new Team();
+                team.setName("teamA");
+                em.persist(team);
+
                 Member member = new Member();
                 member.setUsername("홍길동");
                 member.setAge(20);
+                member.setTeam(team);
                 em.persist(member);
 
                 Member member2 = new Member();
@@ -70,6 +75,7 @@ public class JpaMain {
             */
 
 
+            /*페이징 처리 실습 예제
             List<Member> results = em.createQuery("select m from Member m order by m.age desc", Member.class)
                                      .setFirstResult(0)
                                      .setMaxResults(10)
@@ -78,6 +84,13 @@ public class JpaMain {
 
             for (Member findMember : results) {
                 System.out.println("Member = "+findMember.toString());
+            }
+            */
+
+            List<Member> resultList = em.createQuery("select m from Member m join m.team t", Member.class)
+                    .getResultList();
+            for (Member member1 : resultList) {
+                System.out.println(member1.getTeam().getName());
             }
 
 
