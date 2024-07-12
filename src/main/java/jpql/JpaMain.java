@@ -20,6 +20,7 @@ public class JpaMain {
                 member.setUsername("홍길동");
                 member.setAge(20);
                 member.setTeam(team);
+                member.setType(MemberType.ADMIN);
                 em.persist(member);
 
                 Member member2 = new Member();
@@ -87,11 +88,35 @@ public class JpaMain {
             }
             */
 
+            /* 조인 예제
             List<Member> resultList = em.createQuery("select m from Member m join m.team t", Member.class)
                     .getResultList();
             for (Member member1 : resultList) {
                 System.out.println(member1.getTeam().getName());
+            }*/
+
+            /* 이넘 타입으로 조회 해오기 예제
+            List<Object[]> resultList = em.createQuery("select m.username,'Hello',true from Member m where m.type = jpql.MemberType.ADMIN")
+                    .getResultList();
+
+            if(resultList.isEmpty()) System.out.println("good");
+
+            for (Object[] objects : resultList) {
+                System.out.println(objects[0]);
+                System.out.println(objects[1]);
+                System.out.println(objects[2]);
+            }*/
+
+
+            List<String> resultList = em.createQuery("select function('group_concat',m.username) " +
+                                                        "from Member m", String.class)
+                    .getResultList();
+            if(resultList.isEmpty()) System.out.println("good");
+
+            for (String s : resultList) {
+                System.out.println(s);
             }
+
 
 
             tx.commit();

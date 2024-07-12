@@ -9,7 +9,7 @@
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/C:\어양록\개발(BackEnd)\h2_DB\helloDB"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="dialect.MyH2Direct"/>
 
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
