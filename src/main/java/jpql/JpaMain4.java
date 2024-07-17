@@ -64,6 +64,12 @@ public class JpaMain4 {
             }
 
 
+            //Named쿼리 사용 예제 (Member 엔티티에 Named쿼리 생성함)
+            Member findMember = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원1")
+                    .getSingleResult();
+            System.out.println(findMember);
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
